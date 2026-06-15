@@ -88,6 +88,84 @@ button:disabled {
   margin: 0 auto;
 }
 
+/* Accessibility and mobile navigation */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+.skip-link:focus {
+  left: 16px;
+  top: 16px;
+  width: auto;
+  height: auto;
+  background: var(--surface);
+  color: var(--text);
+  padding: 8px 12px;
+  border-radius: 6px;
+  z-index: 9999;
+}
+
+/* Mobile nav styles */
+.mobile-nav-toggle {
+  display: none;
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  padding: 8px 10px;
+  border-radius: 8px;
+}
+.mobile-nav {
+  display: none;
+  position: absolute;
+  right: 16px;
+  top: 64px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: var(--shadow-soft);
+  flex-direction: column;
+  gap: 8px;
+}
+.mobile-nav a {
+  display: block;
+  padding: 8px 12px;
+  border-radius: 6px;
+}
+.mobile-nav a:focus,
+.mobile-nav a:hover {
+  background: var(--alt-tint);
+}
+
+/* Responsive layout */
+@media (max-width: 840px) {
+  .desktop-nav {
+    display: none;
+  }
+
+  .mobile-nav-toggle {
+    display: inline-flex;
+  }
+
+  .nav-wrap {
+    align-items: center;
+  }
+
+  .hero-content {
+    padding: 40px 0;
+  }
+}
+
+/* Focus styles for keyboard users */
+*:focus {
+  outline: 3px solid color-mix(in srgb, var(--primary) 50%, transparent);
+  outline-offset: 2px;
+}
+
 .site-header {
   position: sticky;
   top: 0;

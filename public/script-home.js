@@ -50,6 +50,41 @@ export function setupNavActive(currentPage = bodyPage) {
   });
 }
 
+// Mobile nav toggle for small screens
+export function setupMobileNav() {
+  const toggle = document.querySelector('.mobile-nav-toggle');
+  const mobileNav = document.querySelector('.mobile-nav');
+  if (!toggle || !mobileNav) return;
+
+  function closeNav() {
+    mobileNav.setAttribute('aria-hidden', 'true');
+    mobileNav.style.display = 'none';
+    toggle.setAttribute('aria-expanded', 'false');
+  }
+
+  function openNav() {
+    mobileNav.setAttribute('aria-hidden', 'false');
+    mobileNav.style.display = 'flex';
+    toggle.setAttribute('aria-expanded', 'true');
+    // focus first link for accessibility
+    const first = mobileNav.querySelector('a');
+    if (first) first.focus();
+  }
+
+  toggle.addEventListener('click', function () {
+    const isOpen = mobileNav.getAttribute('aria-hidden') === 'false';
+    if (isOpen) closeNav();
+    else openNav();
+  });
+
+  // Close when clicking outside
+  document.addEventListener('click', function (ev) {
+    if (!mobileNav.contains(ev.target) && ev.target !== toggle) {
+      closeNav();
+    }
+  });
+}
+
 function escapeHtml(value) {
   return String(value || '')
     .replace(/&/g, '&amp;')
